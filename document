@@ -1,0 +1,41 @@
+login
+************************
+1. confi -> auth.php
+   'guards' => [
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+    ],
+    'providers' => [
+         'admin' => [
+         'driver' => 'eloquent',
+         'model' => App\Model\Admin::class,
+      ]
+    ],
+ ===================================   
+ 2. app -> Http -> Middleware -> AdminAuthenticate.php
+		class AdminAuthenticate
+		{
+		    public function handle($request, Closure $next, $guard = 'admin')
+		    {
+		            if (!Auth::guard($guard)->check()) {
+		                return redirect('lv_admin'); //logout redirect to login page
+		            }
+		          return $next($request);
+		    }
+		}
+========================================
+3.  app -> Http -> kernel.php 
+    protected $routeMiddleware = [
+        'admin'  =>  \App\Http\Middleware\AdminAuthenticate::class,
+    ];
+**********************************************************************    
+Notification Massage 
+**********************************************************************
+https://github.com/mckenziearts/laravel-notify
+
+=====================================
+Storage image display :
+1. cd: php artisan storage:link
+   {{asset('storage/logo/logo.png')}}
