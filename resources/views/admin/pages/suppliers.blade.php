@@ -2,8 +2,10 @@
 @section('title', 'Supplier Manage')
 @push('page-style')
  <!--Data Tables -->
+
   <link href="{{asset('admin/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('admin/plugins/bootstrap-datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+
   @endpush
 @section('content')
 <div class="clearfix"></div>
@@ -23,7 +25,7 @@
        <div class="btn-group float-sm-right">
             <!-- Large Size Modal -->
         <button type="button"  data-toggle="modal" data-target="#largesizemodal" class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i> Create Supplier</button> 
-              <!-- Modal -->
+              <!-- Create Supplier -->
                 <div class="modal fade" id="largesizemodal">
                   <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
@@ -129,6 +131,7 @@
                         <th>Email</th>
                         <th>Mobile Number</th>
                         <th>Location</th>
+                        <th>Details</th>
                         <th>Created At</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -143,20 +146,23 @@
                         <td>{{ $supplier->email }}</td>
                         <td>{{ $supplier->mobile_number }}</td>
                         <td>{{ $supplier->location }}</td>
+                        <td>{{ Str::limit($supplier->company_details, 30)}}</td>
                         <td>{{ $supplier->created_at->diffForHumans() }}</td>
-               
-                           @if($supplier->status==0)
+                          
+                         
+                       <td> </td>
+       
+                         <!--  @if($supplier->status==0)
                           <td class="align-middle text-center">Inactive</td>
                           @elseif($supplier->status==1)
                            <td class="align-middle text-center">Active</td>
                           @else
                           <td class="align-middle text-center">No Data</td>
-                          @endif
+                          @endif -->
                  
                         <td>
-                          <a href="" title="View" class="btn btn-primary"><i class="icon-eye"></i></a>
-                          <a href="" title="Edit" class="btn btn-success"><i class="icon-pencil"></i></a>
-                          <a href=""  title="Delete" class="btn btn-danger"><i class="icon-trash"></i></a>
+                          <a href="{{route('edit-supplier/{id}',['id'=>Crypt::encrypt($supplier->id)])}}" title="Edit" class="btn btn-success"><i class="icon-pencil"></i></a>
+                          <a href="{{route('delete-supplier/{id}',['id'=>Crypt::encrypt($supplier->id)])}}"  title="Delete" class="btn btn-danger"><i class="icon-trash"></i></a>
                         </td>
                        
                     </tr>

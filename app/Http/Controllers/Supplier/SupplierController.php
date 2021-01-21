@@ -84,17 +84,25 @@ class SupplierController extends Controller
             'email'     => 'required|email|max:255|min:5',
             'password'  => 'required|min:8'
         ]);
-        $email = $request->get('email');
-        $password = $request->get('password');
-        $remember= $request->get('remember') ? true : false; 
+          $email    =   $request['email'];
+          $password =   $request['password'];
+          $user         =   Supplier::where('email','=',$email)
+                                        ->where('status','=','1')
+                                        ->first();
+        
         $user_check  = Supplier::where('email','=',$email)->first();
         if(!$user_check)
         {
              connectify('error', '🙁 Ooops 🙁', 'Invalid Email ! Try Again');
             return redirect()->back()->with('error','Your email/password combination was incorrect!');
         }
+           if(!$user)
+        {
+             connectify('error', '🙁 Ooops 🙁', 'Your ID has been deactivated. Please contact administration');
+            return redirect()->back()->with('error','Your ID has been deactivated. Please contact administration');
+        }
 
-        if (Auth::guard('supplier')->attempt(['email' => $request['email'], 'password' => $request['password']], $remember))
+        if (Auth::guard('supplier')->attempt(['email' => $request['email'], 'password' => $request['password'],'status' => '1']))
         {
               connectify('success', '🙏 Welcome 🙏', 'Logged In Successfully');
             return redirect()->route('supplier-dashboard')->with('success','Login Successfull');
@@ -103,6 +111,7 @@ class SupplierController extends Controller
             connectify('error', '🙁 Ooops 🙁', 'Invalid Password ! Try Again');
             return redirect()->back()->with('error','Invalid Password ! Try Again');
         }
+
     }
 
          /* Post: Change admin Profile */

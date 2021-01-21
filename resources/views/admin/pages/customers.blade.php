@@ -133,7 +133,7 @@
                         <td>{{ $customer->mobile_number }}</td>
                         <td>{{ $customer->dob }}</td>
                         <td>{{ $customer->gender }}</td>
-                         <td>{{ $customer->created_at->diffForHumans() }}</td>
+                        <td>{{ $customer->created_at->diffForHumans() }}</td>
                        
                     </tr>
                    @endforeach
