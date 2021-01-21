@@ -44,7 +44,7 @@
 		   </div>
 		  </div>
 		  <div class="card-footer text-center py-3">
-		    <p class="text-warning mb-0">Back To Home Page<a href="#"> Home</a></p>
+		    <p class="text-warning mb-0">Back To Home Page<a href="{{url::to('/')}}"> Home</a></p>
 		  </div>
 	     </div>
 	   </div>

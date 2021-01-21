@@ -121,12 +121,12 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#"><span class="user-profile"><img alt="user avatar" class="img-circle" src="@if(Auth::guard('admin')->user()->image){{asset('admin/images/user/'.Auth::guard('admin')->user()->image)}} @else {{asset('admin/images/avatars/avatar-13.png')}}@endif"></span></a>
+                        <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#"><span class="user-profile"><img alt="user avatar" class="img-circle" src="@if(Auth::guard('admin')->user()->image){{asset('admin/images/profile/'.Auth::guard('admin')->user()->image)}} @else {{asset('admin/images/avatars/avatar-13.png')}}@endif"></span></a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li class="dropdown-item user-details">
                                 <a href="{{route('profile')}}">
                                 <div class="media">
-                                    <div class="avatar"><img alt="user avatar" class="align-self-start mr-3" src="@if(Auth::guard('admin')->user()->image){{asset('admin/images/user/'.Auth::guard('admin')->user()->image)}} @else {{asset('admin/images/avatars/avatar-13.png')}}@endif"></div>
+                                    <div class="avatar"><img alt="user avatar" class="align-self-start mr-3" src="@if(Auth::guard('admin')->user()->image){{asset('admin/images/profile/'.Auth::guard('admin')->user()->image)}} @else {{asset('admin/images/avatars/avatar-13.png')}}@endif"></div>
                                    <!--  {{asset('admin/images/user/'.Auth::guard('admin')->user()->image)}} -->
                                    <!--  {{asset('admin/images/avatars/avatar-13.png')}} -->
                                     <div class="media-body">

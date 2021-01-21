@@ -29,7 +29,7 @@ class UserController extends Controller
                 'mobile_number'   => 'required|min:10|max:10',
                 'password'        => 'required|min:2 ',  
                 'dob'             => 'required',
-                'gender'             => 'required',   
+                'gender'          => 'required',   
               ]);
 
     	$result = new User();
