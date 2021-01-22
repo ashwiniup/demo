@@ -5,11 +5,18 @@
 
   <link href="{{asset('admin/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{asset('admin/plugins/bootstrap-datatable/css/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css">
+   <!--Switchery-->
+  <link href="{{asset('admin/plugins/switchery/css/switchery.min.css')}}" rel="stylesheet" />
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+  
+  <link href="{{asset('admin/plugins/bootstrap-switch/bootstrap-switch.min.css')}}" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
 
   @endpush
 @section('content')
 <div class="clearfix"></div>
-  
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumb-->
@@ -148,18 +155,9 @@
                         <td>{{ $supplier->location }}</td>
                         <td>{{ Str::limit($supplier->company_details, 30)}}</td>
                         <td>{{ $supplier->created_at->diffForHumans() }}</td>
-                          
-                         
-                       <td> </td>
-       
-                         <!--  @if($supplier->status==0)
-                          <td class="align-middle text-center">Inactive</td>
-                          @elseif($supplier->status==1)
-                           <td class="align-middle text-center">Active</td>
-                          @else
-                          <td class="align-middle text-center">No Data</td>
-                          @endif -->
-                 
+                      
+                         <td><input data-id="{{$supplier->id}}" class="js-switch" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Active" data-off="InActive" data-color="#14b6ff" {{ $supplier->status ? 'checked' : '' }} ></td>
+                       
                         <td>
                           <a href="{{route('edit-supplier/{id}',['id'=>Crypt::encrypt($supplier->id)])}}" title="Edit" class="btn btn-success"><i class="icon-pencil"></i></a>
                           <a href="{{route('delete-supplier/{id}',['id'=>Crypt::encrypt($supplier->id)])}}"  title="Delete" class="btn btn-danger"><i class="icon-trash"></i></a>
@@ -195,7 +193,17 @@
   <script src="{{asset('admin/plugins/bootstrap-datatable/js/buttons.html5.min.js')}}"></script>
   <script src="{{asset('admin/plugins/bootstrap-datatable/js/buttons.print.min.js')}}"></script>
   <script src="{{asset('admin/plugins/bootstrap-datatable/js/buttons.colVis.min.js')}}"></script>
+ <!--Switchery Js-->
+    <script src="{{asset('admin/plugins/switchery/js/switchery.min.js')}}"></script>
+    <script>
+      var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+      $('.js-switch').each(function() {
+            new Switchery($(this)[0], $(this).data());
+       });
+    </script>
 
+    <!--Bootstrap Switch Buttons-->
+    <script src="assets/plugins/bootstrap-switch/bootstrap-switch.min.js"></script>
     <script>
      $(document).ready(function() {
       //Default data table
@@ -213,4 +221,29 @@
       } );
 
     </script>
+    <script>
+  $(function() {
+      toastr.options = {
+          "closeButton": true,
+          "newestOnTop": true,
+          "positionClass": "toast-top-right"
+        };
+    $('.js-switch').change(function() {
+        var status = $(this).prop('checked') == true ? 1 : 0; 
+        var user_id = $(this).data('id'); 
+         
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: 'changeStatus',
+            data: {'status': status, 'user_id': user_id},
+            success: function(data){
+              console.log(data.success)
+             
+              location.reload();
+            }
+        });
+    })
+  })
+</script>
 @endpush

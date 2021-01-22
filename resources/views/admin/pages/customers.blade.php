@@ -122,6 +122,7 @@
                         <th>DOB</th>
                         <th>Gender</th>
                         <th>Created At</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -134,6 +135,10 @@
                         <td>{{ $customer->dob }}</td>
                         <td>{{ $customer->gender }}</td>
                         <td>{{ $customer->created_at->diffForHumans() }}</td>
+                        <td>
+                          <a href="{{route('edit-customer/{id}',['id'=>Crypt::encrypt($customer->id)])}}" title="Edit" class="btn btn-success"><i class="icon-pencil"></i></a>
+                          <a href="{{route('delete-customer/{id}',['id'=>Crypt::encrypt($customer->id)])}}"  title="Delete" class="btn btn-danger"><i class="icon-trash"></i></a>
+                        </td>
                        
                     </tr>
                    @endforeach

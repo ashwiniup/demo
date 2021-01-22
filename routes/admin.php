@@ -40,6 +40,7 @@ Route::post('/appsetting',[
   'as'    =>'appsetting'
 ]);    
 /*===========Pages=============*/
+
 Route::get('/customers',[
   'uses' => 'Admin\UserController@getAllCustomer',
   'as'    =>'customers'
@@ -48,7 +49,21 @@ Route::post('/customers',[
   'uses' => 'Admin\UserController@CreateCustomer',
   'as'    =>'customers'
 ]);
+Route::get('edit-customer/{id}', [
+  'uses' => 'Admin\UserController@editCustomerView',
+  'as' => 'edit-customer/{id}'
+ ]);
 
+Route::post('edit-customer', [
+  'uses' => 'Admin\UserController@putCustomer',
+    'as' => 'edit-customer'
+ ]);
+
+Route::get('delete-customer/{id}', [
+  'uses' => 'Admin\UserController@deleteCustomer',
+  'as' => 'delete-customer/{id}'
+ ]);
+/*-------Supplier Curd---------*/
 Route::get('/suppliers',[
   'uses' => 'Admin\UserController@getAllsuppliers',
   'as'    =>'suppliers'
@@ -74,5 +89,6 @@ Route::get('delete-supplier/{id}', [
   'as' => 'delete-supplier/{id}'
  ]);
 
+Route::get('changeStatus', 'Admin\UserController@ChangeUserStatus');
 /*------------End Page---------*/
 });

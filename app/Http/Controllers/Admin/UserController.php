@@ -38,7 +38,7 @@ class UserController extends Controller
         $result->email          = $request['email'];
         $result->mobile_number  = $request['mobile_number'];
         $result->password       = Hash::make($request['password']);
-        $result->dob            =Carbon::parse($request->dob)->format('d-m-Y');
+        $result->dob            = Carbon::parse($request->dob)->format('d-m-Y');
         $result->gender  = $request['gender'];
 
         if($result->save())
@@ -50,6 +50,73 @@ class UserController extends Controller
         { 
         	 connectify('error', 'Ooops 🙁', 'Something went wrong!!🙁 Please Try again.');
         	return redirect()->back()->with('error' ,'🙁 Something went wrong!!🙁 Please Try again 🙁');
+        }
+    }
+      public function editCustomerView($id)
+    {
+
+       try {
+           $decrypted    = Crypt::decrypt($id);
+           $getResult    = User::where('Id',$decrypted)->first();
+           $getResults   = User::select('id')->latest()->get();
+
+           if(!is_null($getResult)){
+            return view('admin.pages.edit.edit-customer',['getResult'=>$getResult,'getResults'=>$getResults]);
+           } else {
+            return redirect()->back()->with('error','Oops ! No Data found for specific id');
+           }
+
+       } catch (\Illuminate\Contracts\Encryption\DecryptException $e) {
+           abort(404);
+       }
+    }
+
+    public function putCustomer(Request $request)
+    {
+        $this->validate($request, [
+            'name'            => 'required|min:5',
+            'email'           => 'required|min:5',
+            'mobile_number'   => 'required|min:10|max:10',
+            'password'        => 'required|min:2 ',  
+            'dob'             => 'required',
+            'gender'          => 'required',     
+         ]);
+        $id              = Crypt::decrypt($request['id']);
+        $name            = strip_tags($request['name']);
+        $email           = strip_tags($request['email']);
+        $mobile_number   = strip_tags($request['mobile_number']);
+        $password        = Hash::make($request['password']);
+        $dob             = strip_tags($request['dob']);
+        $gender          = strip_tags($request['gender']);
+        $updateCustomer  = User::where('id',$id)->update([
+            'name'             => $name,
+            'email'            => $email,
+            'mobile_number'    => $mobile_number,
+            'password'         => $password,
+            'dob'              => $dob,
+            'gender'           => $gender,
+        ]);
+
+        if($updateCustomer){
+             connectify('success', 'Haa Haa 😊 ', ' Customer Updated 😊 Successfully.'); 
+            return redirect()->route('customers')->with('success','Customer Updated 😊 Successfully');
+        } else{
+            connectify('error', 'Ooops 🙁', 'Something went wrong!!🙁 Please Try again.');
+            return redirect()->back()->with('error','Oops ! Something went wrong');
+        }
+    }
+
+     public function deleteCustomer($id)
+    {
+        $id         =   Crypt::decrypt($id);
+        $Restricted =   User::where('id',$id)->delete();
+
+        if($Restricted){
+             connectify('success', 'success ', '😪 ​​​​​ Supplier has been deleted Successfully.😪');
+            return redirect()->back()->with('success',' Supplier has been deleted  successfully');
+        } else {
+              connectify('error', 'Oops 💁', '! Something went wrong 💁.');
+            return redirect()->back()->with('error','Oops ! Something went wrong');
         }
     }
     /*--------------------Supplier------------------------*/
@@ -74,6 +141,7 @@ class UserController extends Controller
                 'document'        => 'mimes:pdf,word|required|max:20000',  
                 'company_details' => 'required|min:15 '    
               ]);
+
        
       $result = new Supplier();
         $result->name           = $request['name'];
@@ -96,6 +164,7 @@ class UserController extends Controller
           return redirect()->back()->with('error' ,'🙁 Something went wrong!!🙁 Please Try again 🙁');
         }
     }
+
      public function editSupplierView($id)
     {
 
@@ -164,23 +233,13 @@ class UserController extends Controller
             return redirect()->back()->with('error','Oops ! Something went wrong');
         }
     }
-     public function changeStatus(Request $request)
+    public function changeUserStatus(Request $request)
     {
         $user = Supplier::find($request->user_id);
         $user->status = $request->status;
-       
-     if( $user->save())
-        {
-            
-            connectify('success', 'Haa Haa 😊 ', ' Status  Updated 😊 Successfully.');
-            return redirect()->back()->with('success','😊 ​​​​​supplier Created 😊 Successfully 😊');
-        }
-        else
-        {
-            connectify('error', 'Ooops 🙁', 'Something went wrong!!🙁 Please Try again.');
-          return redirect()->back()->with('error' ,'🙁 Something went wrong!!🙁 Please Try again 🙁');
-        }
-       
-    }
+       $user->save();
+        smilify('success', 'Status successfully Update');
+       return response()->json(['success' => 'Status successfully Update']);
 
+    }
 }

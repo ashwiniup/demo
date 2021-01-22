@@ -24,6 +24,8 @@ class CreateSupplierTable extends Migration
             $table->string('location');
             $table->string('document');
             $table->string('company_details');
+            $table->boolean('status')->default(0);
+            $table->timestamp('approval_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
