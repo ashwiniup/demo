@@ -45,10 +45,17 @@ Route::get('/customers',[
   'uses' => 'Admin\UserController@getAllCustomer',
   'as'    =>'customers'
 ]);
-Route::post('/customers',[
+
+Route::get('/create-customer', function () {
+  return view('admin.pages.add.create-customer');
+})->name('create-customer');
+
+Route::post('/create-customer',[
   'uses' => 'Admin\UserController@CreateCustomer',
-  'as'    =>'customers'
+  'as'    =>'create-customer'
 ]);
+
+
 Route::get('edit-customer/{id}', [
   'uses' => 'Admin\UserController@editCustomerView',
   'as' => 'edit-customer/{id}'
@@ -69,9 +76,14 @@ Route::get('/suppliers',[
   'as'    =>'suppliers'
 ]);
 
-Route::post('/supplier',[
+Route::get('/create-supplier', function () {
+  return view('admin.pages.add.create-supplier');
+})->name('create-supplier');
+
+
+Route::post('/create-supplier',[
   'uses' => 'Admin\UserController@CreateSupplier',
-  'as'    =>'supplier'
+  'as'    =>'create-supplier'
 ]);
 
 Route::get('edit-supplier/{id}', [

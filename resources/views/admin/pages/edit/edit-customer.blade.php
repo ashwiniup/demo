@@ -14,50 +14,52 @@
             <li class="breadcrumb-item active" aria-current="page">Edit Customer</li>
          </ol>
      </div>
-     <div class="col-md-12">
-       <div class="btn-group float-sm-right">
-               <form  action="{{ route('edit-customer') }}" method="post" enctype="multipart/form-data">
+   </div>
+   <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+               <form id="signupForm" action="{{URL::route('edit-customer')}}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                        <label for="validationCustom01">Full Name</label>
-                          <input type="text" name="name" class="form-control" placeholder="Enter Full Name"  value="{{$getResult->name}}">
-                           <span class="text-danger">{{ $errors->first('name') }}</span>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                        <label for="validationCustom02">Email</label>
-                          <input type="text" name="email" class="form-control" placeholder="Enter Email"  value="{{$getResult->email}}">
-                           <span class="text-danger">{{ $errors->first('email') }}</span>
-                       </div>
-                      </div>
-                  
-                    <div class="col-md-6">
-                      <div class="form-group">
-                         <label for="validationCustom3">Mobile Number</label>
-                          <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number" value="{{$getResult->mobile_number}}">
-                           <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
-                      </div>
+                <h4 class="form-header text-uppercase">
+                  <i class="fa fa-address-book-o"></i>
+                   Edit Customer
+                </h4>
+          
+                <div class="form-group row">
+                  <label for="input-10" class="col-sm-2 col-form-label">Full Name <span class="text-danger font-weight-bold">*</span></label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="Enter Full Name"  value="{{$getResult->name}}"  id="input-10" name="name">
+                         <span class="text-danger">{{ $errors->first('name') }}</span>
                   </div>
-                       <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="validationCustom4">Password</label>
-                          <input type="password" class="form-control" placeholder="Enter Password" name="password" value="{{$getResult->password}}">
-                           <span class="text-danger">{{ $errors->first('password') }}</span>
-                      </div>
+                  <label for="input-11" class="col-sm-2 col-form-label">Email<span class="text-danger font-weight-bold">*</span></label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="Enter Email"  value="{{$getResult->email}}" id="input-11" name="email">
+                      <span class="text-danger">{{ $errors->first('email') }}</span>
                   </div>
-                      <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="validationCustom6">Date Of Birth</label>
-                          <input type="date" class="form-control" name="dob" value="{{$getResult->dob}}">
-                           <span class="text-danger">{{ $errors->first('dob') }}</span>
-                      </div>
+                </div>
+            
+                <div class="form-group row">
+                  <label for="input-12" class="col-sm-2 col-form-label">Mobile Number<span class="text-danger font-weight-bold"> *</span></label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number" value="{{$getResult->mobile_number}}" id="input-12">
+                       <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
                   </div>
-                  <div class="col-md-6">
-                        <div class="form-group">
-                       <label for="">Gender</label><br>
+                  <label for="input-13" class="col-sm-2 col-form-label">Password<span class="text-danger font-weight-bold"> *</span></label>
+                  <div class="col-sm-4">
+                    <input type="password" class="form-control"  placeholder="Enter Password" name="password" value="{{ $getResult->password }}" id="input-13">
+                      <span class="text-danger">{{ $errors->first('password') }}</span>
+                  </div>
+                </div>
+    
+                  <div class="form-group row">
+                  <label for="input-12" class="col-sm-2 col-form-label">Date Of Birth<span class="text-danger font-weight-bold"> *</span></label>
+                  <div class="col-sm-4">
+                  <input type="date" class="form-control" name="dob" value="{{$getResult->dob}}">
+                    <span class="text-danger">{{ $errors->first('dob') }}</span>
+                  </div>
+                   <label for="input-12" class="col-sm-2 col-form-label">Gender<span class="text-danger font-weight-bold"> *</span></label>
+                     <div class="col-sm-4">
                       <div class="icheck-material-primary icheck-inline">
                             <input type="radio" id="male" name="gender"  value="male" checked />
                             <label for="male">Male</label>
@@ -71,18 +73,22 @@
                             <label for="other">Other</label>
                              <span class="text-danger">{{ $errors->first('gender') }}</span>
                           </div>
-                      </div>
-                  </div>
-               <input type="hidden" name="id" value="{{Crypt::encrypt($getResult->id)}}">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        <button type="submit" class="btn btn-white"><i class="fa fa-check-square-o"></i> Create Customer</button>
-                      </div>
-                        </form>
-                    </div>
-                  </div>
+                        </div>
                 </div>
+                
+                <div class="form-group row">
+                     <input type="hidden" name="id" value="{{Crypt::encrypt($getResult->id)}}">
+                </div>
+                <div class="form-footer">
+                    <button type="submit" class="btn btn-success float-right"><i class="fa fa-check-square-o"></i> SAVE</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+            
       
     <!-- End Breadcrumb-->
      

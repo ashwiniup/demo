@@ -44,7 +44,7 @@ class UserController extends Controller
         if($result->save())
         {
                connectify('success', 'Haa Haa 😊 ', '  Customer Create 😊 Successfully.');
-            return redirect()->back()->with('success','😊 Customer Create 😊 Successfully 😊');
+            return redirect()->route('customers')->with('success','😊 Customer Create 😊 Successfully 😊');
         }
         else
         { 
@@ -112,8 +112,8 @@ class UserController extends Controller
         $Restricted =   User::where('id',$id)->delete();
 
         if($Restricted){
-             connectify('success', 'success ', '😪 ​​​​​ Supplier has been deleted Successfully.😪');
-            return redirect()->back()->with('success',' Supplier has been deleted  successfully');
+             connectify('success', 'success ', '😪 ​​​​​ Customer has been deleted Successfully.😪');
+            return redirect()->back()->with('success',' Customer has been deleted  successfully');
         } else {
               connectify('error', 'Oops 💁', '! Something went wrong 💁.');
             return redirect()->back()->with('error','Oops ! Something went wrong');
@@ -156,7 +156,7 @@ class UserController extends Controller
         {
              $request->document->move(public_path('supplier/document'), $document);
             connectify('success', 'Haa Haa 😊 ', ' supplier Created 😊 Successfully.');
-            return redirect()->back()->with('success','😊 ​​​​​supplier Created 😊 Successfully 😊');
+            return redirect()->route('suppliers')->with('success','😊 ​​​​​supplier Created 😊 Successfully 😊');
         }
         else
         {

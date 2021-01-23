@@ -12,9 +12,8 @@
   <link href="{{asset('admin/plugins/bootstrap-switch/bootstrap-switch.min.css')}}" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-
-
   @endpush
+
 @section('content')
 <div class="clearfix"></div>
   <div class="content-wrapper">
@@ -30,95 +29,7 @@
      </div>
      <div class="col-sm-3">
        <div class="btn-group float-sm-right">
-            <!-- Large Size Modal -->
-        <button type="button"  data-toggle="modal" data-target="#largesizemodal" class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i> Create Supplier</button> 
-              <!-- Create Supplier -->
-                <div class="modal fade" id="largesizemodal">
-                  <div class="modal-dialog modal-lg modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Create Supplier Form</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                <form  action="{{URL::route('supplier')}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                        <label for="validationCustom01">Full Name</label>
-                          <input type="text" name="name" class="form-control" placeholder="Enter Full Name"  value="{{old('name')}}" required="">
-                           <span class="text-danger">{{ $errors->first('name') }}</span>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-                        <div class="form-group">
-                        <label for="validationCustom02">Email</label>
-                          <input type="text" name="email" class="form-control" placeholder="Enter Email"  value="{{old('email')}}" required="">
-                           <span class="text-danger">{{ $errors->first('email') }}</span>
-                       </div>
-                      </div>
-                  
-                    <div class="col-md-6">
-                      <div class="form-group">
-                         <label for="validationCustom3">Mobile Number</label>
-                          <input type="text" class="form-control" placeholder="Enter Mobile Number" name="mobile_number" value="{{old('mobile_number')}}" required="">
-                           <span class="text-danger">{{ $errors->first('mobile_number') }}</span>
-                      </div>
-                  </div>
-                       <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputUsername">Password</label>
-                                <div class="position-relative has-icon-right">
-                                    <input type="password" class="form-control" placeholder="Enter Password" name="password" value="{{ old('password') }}" >
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputPassword">Location</label>
-                                <div class="position-relative has-icon-right">
-                                    <input type="text" class="form-control input-shadow" placeholder="Enter Location" name="location" required value="{{ old('location') }}" >
-                                    <span class="text-danger">{{ $errors->first('location') }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputPassword">Upload Document</label>
-                                <div class="position-relative">
-                                    <input type="file" class="form-control input-shadow" name="document" required value="{{ old('document') }}" >
-
-                                    <span class="text-danger">{{ $errors->first('document') }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="exampleInputPassword" class="">Company Details</label>
-                                 <div class="position-relative">
-                                   <textarea rows="4" class="form-control" name="company_details"  id="basic-textarea">
-                                       {{ old('company_details') }}
-                                   </textarea>
-
-                                    <span class="text-danger">{{ $errors->first('company_details') }}</span>
-                                </div>
-                                
-                            </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        <button type="submit" class="btn btn-white"><i class="fa fa-check-square-o"></i> Create Supplier</button>
-                      </div>
-                        </form>
-                    </div>
-                  </div>
-                </div>
-           </div>
+            <a href="{{route('create-supplier')}}"  class="btn btn-light waves-effect waves-light"><i class="fa fa-cog mr-1"></i>Create Supplier</a>
       </div>
      </div>
      </div>
