@@ -93,8 +93,8 @@
           <i class="zmdi zmdi-view-dashboard"></i> <span>Home Management</span><i class="fa fa-angle-left pull-right"></i>
         </a>
     <ul class="sidebar-submenu">
-      <li><a href="#"><i class="zmdi zmdi-forward"></i> Admin</a></li>
-      <li><a href="#"><i class="zmdi zmdi-forward"></i> Supplier</a></li> 
+      <li><a href="#"><i class="zmdi zmdi-forward"></i> Demo1</a></li>
+      <li><a href="#"><i class="zmdi zmdi-forward"></i> Demo2</a></li> 
     </ul>
       </li>
        <li>
@@ -102,8 +102,7 @@
           <i class="zmdi zmdi-view-dashboard"></i> <span>Content Management</span><i class="fa fa-angle-left pull-right"></i>
         </a>
     <ul class="sidebar-submenu">
-      <li><a href="#"><i class="zmdi zmdi-forward"></i> Admin</a></li>
-      <li><a href="#"><i class="zmdi zmdi-forward"></i> Supplier</a></li> 
+      <li><a href="{{route('static-pages')}}"><i class="zmdi zmdi-forward"></i> Static Pages</a></li>
     </ul>
       </li>
 

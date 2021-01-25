@@ -102,5 +102,29 @@ Route::get('delete-supplier/{id}', [
  ]);
 
 Route::get('changeStatus', 'Admin\UserController@ChangeUserStatus');
+
+/*-------Statics Pages-------*/
+Route::get('/static-pages',[
+  'uses' => 'Admin\StaticPagesController@getAllPages',
+  'as'    =>'static-pages'
+]);
+
+Route::get('/create-page', function () {
+  return view('admin.pages.static-pages.create-page');
+})->name('create-page');
+
+
+Route::post('/create-page',[
+  'uses' => 'Admin\StaticPagesController@CreatePage',
+  'as'    =>'create-page'
+]);
+
+Route::get('edit-page/{id}', [
+  'uses' => 'Admin\StaticPagesController@editPageView',
+  'as' => 'edit-page/{id}'
+ ]);
+
+Route::post('edit-page', 'Admin\StaticPagesController@putPage')->name('edit-page');
+Route::get('delete-page/{id}', 'Admin\StaticPagesController@deletePage')->name('delete-page/{id}');
 /*------------End Page---------*/
 });
