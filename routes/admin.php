@@ -126,5 +126,20 @@ Route::get('edit-page/{id}', [
 
 Route::post('edit-page', 'Admin\StaticPagesController@putPage')->name('edit-page');
 Route::get('delete-page/{id}', 'Admin\StaticPagesController@deletePage')->name('delete-page/{id}');
+
+/*-----Categories Management-------*/
+Route::get('/categories', 'Admin\CategoriesController@getAllCategories')->name('categories');
+
+Route::get('/create-category', function () {
+  return view('admin.pages.categories.create-category');
+})->name('create-category');
+
+Route::post('create-category', 'Admin\CategoriesController@CreateCategory')->name('create-category');
+
+Route::get('edit-category/{id}', 'Admin\CategoriesController@editCategoryView')->name('edit-category/{id}');
+Route::post('edit-category', 'Admin\CategoriesController@putCategory')->name('edit-category');
+Route::get('delete-category/{id}', 'Admin\CategoriesController@deleteCategory')->name('delete-category/{id}');
+
+
 /*------------End Page---------*/
 });

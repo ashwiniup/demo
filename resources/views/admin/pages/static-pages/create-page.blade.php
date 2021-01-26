@@ -15,7 +15,7 @@
 		    <h4 class="page-title">Create Page</h4>
 		    <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javaScript:void();">Contant Management</a></li>
-            <li class="breadcrumb-item"><a href="{{route('customers')}}">Static Pages</a></li>
+            <li class="breadcrumb-item"><a href="{{route('static-pages')}}">Static Pages</a></li>
             <li class="breadcrumb-item active" aria-current="page">Create Page</li>
          </ol>
 	   </div>

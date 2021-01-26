@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Page Edit')
+@section('title', 'Create category')
 @push('page-style')
  <!--text editor-->
   <link rel="stylesheet" href="{{asset('admin/plugins/summernote/dist/summernote-bs4.css')}}"/> 
@@ -12,11 +12,11 @@
       <!-- Breadcrumb-->
      <div class="row pt-2 pb-2">
         <div class="col-sm-12">
-		    <h4 class="page-title">Page Edit</h4>
+		    <h4 class="page-title">Create category</h4>
 		    <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="javaScript:void();">Contant Management</a></li>
-            <li class="breadcrumb-item"><a href="{{route('static-pages')}}">Static Pages</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Page Edit</li>
+            <li class="breadcrumb-item"><a href="javaScript:void();">Categories Management</a></li>
+            <li class="breadcrumb-item"><a href="{{route('categories')}}">Categories</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Create category</li>
          </ol>
 	   </div>
    </div>
@@ -24,24 +24,31 @@
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-                 <form  action="{{ route('edit-page') }}" method="post" enctype="multipart/form-data">
+                 <form  action="{{ route('create-category') }}" method="post" enctype="multipart/form-data">
                     @csrf
                 <h4 class="form-header text-uppercase">
-                  <i class="fa fa-edit"></i>
-                  Edit Page
+                  <i class="fa fa-address-book-o"></i>
+                  Create New category
                 </h4>
              <div class="row">
+                     <div class="col-md-6">
+                        <div class="form-group">
+                        <label for="validationCustom01">Categories</label>
+                          <input type="text" name="categories" class="form-control" placeholder="Enter Title "  value="{{old('categories')}}">
+                           <span class="text-danger">{{ $errors->first('categories') }}</span>
+                        </div>
+                      </div>
                       <div class="col-md-6">
                         <div class="form-group">
-                        <label for="validationCustom01">Page Name</label>
-                          <input type="text" name="page_name" class="form-control" placeholder="Enter Page Name"  value="{{$getResult->page_name}}">
-                           <span class="text-danger">{{ $errors->first('page_name') }}</span>
+                        <label for="validationCustom01">Title</label>
+                          <input type="text" name="title" class="form-control" placeholder="Enter Title "  value="{{old('title')}}">
+                           <span class="text-danger">{{ $errors->first('title') }}</span>
                         </div>
                       </div>
                       <div class="col-md-6">
                         <div class="form-group">
                         <label for="validationCustom02">Slug</label>
-                          <input type="text" name="slug" class="form-control" placeholder="Enter Slug"  value="{{$getResult->slug}}">
+                          <input type="text" name="slug" class="form-control" placeholder="Enter Slug"  value="{{old('slug')}}">
                            <span class="text-danger">{{ $errors->first('slug') }}</span>
                        </div>
                       </div>
@@ -49,25 +56,25 @@
                     <div class="col-md-6">
                       <div class="form-group">
                          <label for="validationCustom3">Meta Keywords</label>
-                          <input type="text" class="form-control" placeholder="Enter Meta Keywords" name="m_keywords" value="{{$getResult->m_keywords}}">
+                          <input type="text" class="form-control" placeholder="Enter Meta Keywords" name="m_keywords" value="{{old('m_keywords')}}">
                            <span class="text-danger">{{ $errors->first('m_keywords') }}</span>
                       </div>
                   </div>
-                       <div class="col-md-6">
+                       <div class="col-md-12">
                       <div class="form-group">
                         <label for="validationCustom4">Meta Description</label>
-                          <input type="text" class="form-control" placeholder="Enter Meta Description" name="m_description" value="{{$getResult->m_description}}">
+                          <input type="text" class="form-control" placeholder="Enter Meta Description" name="m_description" value="{{old('m_description')}}">
                            <span class="text-danger">{{ $errors->first('m_description') }}</span>
                       </div>
                   </div>
                    <div class="col-md-12">
                       <div class="form-group">
                         <label for="validationCustom4">Page Description</label>
-                          <textarea id="summernoteEditor" name="page_description"  class="form-control" >{{$getResult->page_description}}</textarea>
-                           <span class="text-danger">{{ $errors->first('page_description') }}</span>
+                          <textarea id="summernoteEditor" name="p_data"  class="form-control" >{{old('p_data')}}</textarea>
+                           <span class="text-danger">{{ $errors->first('p_data') }}</span>
                       </div>
                   </div>
-                  <input type="hidden" name="id" value="{{Crypt::encrypt($getResult->id)}}">
+              
                 </div>
                 <div class="form-footer">
                     <button type="submit" class="btn btn-success float-right"><i class="fa fa-check-square-o"></i> SAVE</button>

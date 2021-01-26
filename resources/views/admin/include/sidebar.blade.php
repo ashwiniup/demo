@@ -24,8 +24,7 @@
           <i class="fa fa-angle-left float-right"></i>
         </a>
         <ul class="sidebar-submenu">
-          <li><a href="#"><i class="zmdi zmdi-forward"></i> Categorie1</a></li>
-          <li><a href="#"><i class="zmdi zmdi-forward"></i> Categorie2</a></li>
+          <li><a href="{{route('categories')}}"><i class="zmdi zmdi-forward"></i> Categories & Product</a></li>
         </ul>
        </li>
      <li>
