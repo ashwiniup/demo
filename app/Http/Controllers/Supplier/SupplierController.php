@@ -22,6 +22,17 @@ class SupplierController extends Controller
      {
         $this->hasher = $hasher;
      }
+          public function checkLogin()
+     {
+    if (Auth::guard('supplier')->user()) 
+       {
+         return redirect(route('supplier-dashboard'));
+       }
+    else
+       {
+            return view('supplier.auth.login');
+       }
+}
 
 	 public function index()
     {

@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 
 /*-------------Admin----------------*/
-Route::get('/ts-admin', function () {
-  return view('admin.auth.login');
-})->name('ts-admin');
+
+Route::get('/ts-admin', 'Admin\AuthController@checkLogin')->name('ts-admin');
 
 Route::post('/login', 'Admin\AuthController@postLogin')->name('login'); 
 

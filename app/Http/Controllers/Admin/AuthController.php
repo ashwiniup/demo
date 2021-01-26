@@ -26,6 +26,18 @@ class AuthController extends Controller
         $this->hasher = $hasher;
      }
 
+     public function checkLogin()
+     {
+    if (Auth::guard('admin')->user()) 
+       {
+         return redirect(route('dashboard'));
+       }
+    else
+       {
+            return view('admin.auth.login');
+       }
+}
+
       public function index()
     {
       date_default_timezone_set('Asia/Calcutta');

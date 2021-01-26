@@ -11,9 +11,7 @@ Route::post('signup',[
   'as'    =>'signup'
 ]);
 
-Route::get('/supplier-login', function () {
-   return view('supplier.auth.login');
-})->name('supplier-login');
+Route::get('/supplier-login', 'Supplier\SupplierController@checkLogin')->name('supplier-login');
 
 Route::post('/supplier-login',[
   'uses' => 'Supplier\SupplierController@postLogin',
